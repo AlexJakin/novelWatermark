@@ -1,0 +1,5 @@
+2024-05-21 20:40:35,838 mylog INFO experiment4.py--68line :The result of the ai direction: Watermarked text correctly classified: 99.90%
+2024-05-22 00:34:18,826 mylog INFO experiment4.py--68line :The result of the physical direction: Watermarked text correctly classified: 100.00%
+2024-05-22 10:47:00,883 mylog INFO experiment4.py--68line :The result of the economics direction: Watermarked text correctly classified: 99.95%
+2024-05-22 20:19:22,747 mylog INFO experiment4.py--68line :The result of the quantum direction: Watermarked text correctly classified: 99.88%
+2024-05-23 02:08:52,746 mylog INFO experiment4.py--68line :The result of the math direction: Watermarked text correctly classified: 100.00%

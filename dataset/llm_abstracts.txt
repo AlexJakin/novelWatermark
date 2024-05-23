@@ -1,0 +1,36 @@
+AI transparency is a central pillar of responsible AI deployment and
+effective human-AI collaboration. A critical approach is communicating
+uncertainty, such as displaying AI's confidence level, or its correctness
+likelihood (CL), to users. However, these confidence levels are often
+uncalibrated, either overestimating or underestimating actual CL, posing risks
+and harms to human-AI collaboration. This study examines the effects of
+uncalibrated AI confidence on users' trust in AI, AI advice adoption, and
+collaboration outcomes. We further examined the impact of increased
+transparency, achieved through trust calibration support, on these outcomes.
+Our results reveal that uncalibrated AI confidence leads to both the misuse of
+overconfident AI and disuse of unconfident AI, thereby hindering outcomes of
+human-AI collaboration. Deficiency of trust calibration support exacerbates
+this issue by making it harder to detect uncalibrated confidence, promoting
+misuse and disuse of AI. Conversely, trust calibration support aids in
+recognizing uncalibration and reducing misuse, but it also fosters distrust and
+causes disuse of AI. Our findings highlight the importance of AI confidence
+calibration for enhancing human-AI collaboration and suggest directions for AI
+design and regulation.
+
+This paper focuses on supporting AI/ML Security Workers -- professionals
+involved in the development and deployment of secure AI-enabled software
+systems. It presents AI/ML Adversarial Techniques, Tools, and Common Knowledge
+(AI/ML ATT&CK) framework to enable AI/ML Security Workers intuitively to
+explore offensive and defensive tactics.
+
+AI has surpassed humans across a variety of tasks such as image
+classification, playing games (e.g., go, "Starcraft" and poker), and protein
+structure prediction. However, at the same time, AI is also bearing serious
+controversies. Many researchers argue that little substantial progress has been
+made for AI in recent decades. In this paper, the author (1) explains why
+controversies about AI exist; (2) discriminates two paradigms of AI research,
+termed "weak AI" and "strong AI" (a.k.a. artificial general intelligence); (3)
+clarifies how to judge which paradigm a research work should be classified
+into; (4) discusses what is the greatest value of "weak AI" if it has no chance
+to develop into "strong AI".
+
