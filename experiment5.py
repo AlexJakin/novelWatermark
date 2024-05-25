@@ -32,7 +32,7 @@ for i in range(EPOCH):
 
     wk_evals = []
 
-    for j, data in enumerate(dataset[:5000]):
+    for j, data in enumerate(dataset[:500]):
         prompt = data['prompt']
         human_response = data['rest']
         rest_len = len(human_response)
@@ -50,7 +50,7 @@ for i in range(EPOCH):
         wk_evals.append(wk_eval)
 
         #print(f'The result of the HarryPotter experiment: Iteration {j + 1}/{dataset_len}: WaterMark: {wk_eval}', flush=True)
-        print(f'The result of the HarryPotter experiment: Iteration {j + 1}/{5000}: WaterMark: {wk_eval}', flush=True)
+        print(f'The result of the HarryPotter experiment: Iteration {j + 1}/{500}: WaterMark: {wk_eval}', flush=True)
 
 
     # 计算分类精度
