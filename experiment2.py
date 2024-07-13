@@ -57,6 +57,7 @@ for i in range(len(DIF_DIRS)):
         # 测试我们的模型是将在arxiv数据集归类为人类还是人工智能生成 log_prob大的是添加了水印的gpt写的
         dir_whole_abstract = prompt + ' ' + human_response
         id_list = llm.llm.str_to_idlist(dir_whole_abstract)
+
         marked_total_log_prob = llm.calc_log_prob(id_list, with_wk=True)  # gpt写的，即做了水印标记
         unmarked_total_log_prob = llm.calc_log_prob(id_list, with_wk=False)  # 人类写的logit
         current_human_eval_status = (unmarked_total_log_prob < marked_total_log_prob)  # 记录计算后判断成功

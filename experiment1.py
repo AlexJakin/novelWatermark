@@ -15,8 +15,11 @@ root_path = os.path.dirname(current_path)
 logger = MyLogging("mylog",file=root_path+"/testProject/out/log/experiment1.log")
 
 EPOCH = 1
-MODEL_NAME = 'openai-community/gpt2'
+# MODEL_NAME = 'openai-community/gpt2'
 # MODEL_NAME = 'openai-community/gpt2-xl'
+MODEL_NAME = 'Xenova/gpt-3.5-turbo'
+#model_name = 'facebook/opt-1.3b'
+
 # INIT_SENT = 'The following sentences are taken from the abstract of a scientific paper.'
 INIT_SENT = 'The following sentence comes from an abstract of computer science paper.'
 

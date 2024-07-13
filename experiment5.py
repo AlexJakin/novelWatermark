@@ -13,6 +13,8 @@ root_path = os.path.dirname(current_path)
 
 # 记录日志
 logger = MyLogging("mylog",file=root_path+"/testProject/out/log/experiment5.log")
+logger1 = MyLogging("mylog1",file=root_path+"/testProject/out/log/experiment5_success.log")
+logger2 = MyLogging("mylog2",file=root_path+"/testProject/out/log/experiment5_error.log")
 
 EPOCH = 3
 MODEL_NAME = 'openai-community/gpt2'
@@ -40,6 +42,7 @@ for i in range(EPOCH):
         #  生成带水印文本
         id_list = llm.llm.str_to_idlist(prompt)
         generate_text_with_wk = llm.generate_next_ids(id_list, gen_len=rest_len, wk=True)
+        marked_text_content = llm.llm.tokenlist_to_str(llm.llm.idlist_to_tokenlist(generate_text_with_wk)) # 带有水印的生成内容
         text_with_wk = generate_text_with_wk[len(id_list):]
 
         # 测试模型是否正确分类带水印的文本
@@ -51,6 +54,12 @@ for i in range(EPOCH):
 
         #print(f'The result of the HarryPotter experiment: Iteration {j + 1}/{dataset_len}: WaterMark: {wk_eval}', flush=True)
         print(f'The result of the HarryPotter experiment: Iteration {j + 1}/{500}: WaterMark: {wk_eval}', flush=True)
+        if wk_eval == True:
+            logger1.info(
+                f'Iteration {j + 1}/{500} The prompt: {prompt},//======//, the generate: {marked_text_content}, the with_wk_total_log_prob is {with_wk_total_log_prob}, the with_no_wk_total_log_prob is {with_no_wk_total_log_prob}')
+        else:
+            logger2.info(
+                f'Iteration {j + 1}/{500} The prompt: {prompt},//======//, the generate: {marked_text_content}, the with_wk_total_log_prob is {with_wk_total_log_prob}, the with_no_wk_total_log_prob is {with_no_wk_total_log_prob}')
 
 
     # 计算分类精度

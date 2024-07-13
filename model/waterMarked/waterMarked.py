@@ -18,7 +18,7 @@ class WatermarkedLLM:
         self.watermark = torch.nn.functional.softmax(wk, dim=-1)
 
     #
-    def apply_watermark(self, probs):
+    def applyWK(self, probs):
         return ((1 - self.alpha) * probs) + (self.alpha * self.watermark)
 
     def generate_next_ids(self, prompt_ids, gen_len = 30, wk=True):
@@ -26,7 +26,7 @@ class WatermarkedLLM:
             next_logits = self.llm.get_logits(prompt_ids)[0, -1, :]
             next_probs = self.llm.logits_to_probs(next_logits)
             if wk:
-                next_probs = self.apply_watermark(next_probs)
+                next_probs = self.applyWK(next_probs)
             next_ids = self.llm.decode(next_probs)
             prompt_ids = torch.cat((prompt_ids, next_ids.unsqueeze(0)))
 
@@ -39,11 +39,11 @@ class WatermarkedLLM:
             if i != 0:
                 probs = self.llm.logits_to_probs(logits[i - 1, :])
                 if with_wk:
-                    prob = ((1 - self.alpha) * probs[id] + self.alpha * self.watermark[id])
+                    nextOne_prob = ((1 - self.alpha) * probs[id] + self.alpha * self.watermark[id])
                 else:
-                    prob = probs[id]
+                    nextOne_prob = probs[id]
                 # 转化为对数，方便计算
-                log_prob = math.log(prob)
+                log_prob = math.log(nextOne_prob)
                 total_log_prob -= log_prob
 
         return total_log_prob
@@ -51,7 +51,9 @@ class WatermarkedLLM:
 
 if __name__ == '__main__':
     # model_name = 'openai-community/gpt2'
-    model_name = 'openai-community/gpt2-xl'
+    # model_name = 'openai-community/gpt2-xl'
+    model_name = 'facebook/opt-1.3b'
+
     llm = LLM.LLM(model_name)
     seed = 12345
     wllm = WatermarkedLLM(llm, seed)
