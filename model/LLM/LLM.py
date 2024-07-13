@@ -1,13 +1,17 @@
 import torch
 import random
 from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import GPT2TokenizerFast
+
 
 class LLM:
     def __init__(self, model_name):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        # self.tokenizer = GPT2TokenizerFast.from_pretrained(model_name)
         self.vocab_size = len(self.tokenizer)
         # because the task is text generation, use the AutoModelForCausalLM to construct model
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
+
 
     # use top_k
     def decode(self, probs, top_k=-1):

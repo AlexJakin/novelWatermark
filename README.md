@@ -11,13 +11,9 @@
 
 gpt3 2000样本 gen_len = 30
 Human-generated text correctly classified: 100.00%
-Watermarked text correctly classified: 94.84%
-Non-watermarked text correctly classified: 80.98%
-
-
-Human-generated text correctly classified: 100.00%
 Watermarked text correctly classified: 95.14%
 Non-watermarked text correctly classified: 80.90%
+
 
 
 # 实验二

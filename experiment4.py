@@ -15,7 +15,9 @@ root_path = os.path.dirname(current_path)
 logger = MyLogging("mylog",file=root_path+"/testProject/out/log/experiment4.log")
 
 EPOCH = 3
-MODEL_NAME = 'openai-community/gpt2'
+#MODEL_NAME = 'openai-community/gpt2'
+#MODEL_NAME = 'HuggingFaceH4/tiny-random-LlamaForCausalLM'
+MODEL_NAME = 'meta-llama/Meta-Llama-3-8B-Instruct'
 INIT_SENT = 'The following sentences are taken from the abstract of a scientific paper.' #  前提引导
 # different directions
 DIF_DIRS = [
