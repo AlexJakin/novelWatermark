@@ -52,7 +52,7 @@ for i in range(len(DIF_DIRS)):
         text_with_wk = generate_text_with_wk[len(id_list):]
 
         # 测试模型是否正确分类带水印的文本
-        # 带水印攻击的，会一直干扰拉低logit 导致最后结果低于没有带水印的
+        # 带水印的，会一直干扰拉低logit 导致最后结果低于无水印文本
         with_wk_total_log_prob = llm.calc_log_prob(generate_text_with_wk, with_wk=True)
         with_no_wk_total_log_prob = llm.calc_log_prob(generate_text_with_wk, with_wk=False)
         wk_eval = (with_no_wk_total_log_prob > with_wk_total_log_prob )
