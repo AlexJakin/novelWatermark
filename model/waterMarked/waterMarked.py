@@ -3,7 +3,6 @@ import torch
 import math
 
 class WatermarkedLLM:
-
     def __init__(self, llm, seed):
         self.llm = llm
         self.alpha = 0.15 # Relative proportion of watermark in overall prob
@@ -29,7 +28,6 @@ class WatermarkedLLM:
                 next_probs = self.applyWK(next_probs)
             next_ids = self.llm.decode(next_probs)
             prompt_ids = torch.cat((prompt_ids, next_ids.unsqueeze(0)))
-
         return prompt_ids
 
     def calc_log_prob(self, ids, with_wk=True):

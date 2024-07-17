@@ -1,5 +1,7 @@
 '''
+检测有水印
 识别arxiv一个方向的摘要 人写和机器写
+
 '''
 from model.waterMarked import waterMarked
 from model.LLM import LLM
