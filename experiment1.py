@@ -1,8 +1,4 @@
-'''
-检测有水印
-识别arxiv一个方向的摘要 人写和机器写
 
-'''
 from model.waterMarked import waterMarked
 from model.LLM import LLM
 from dataModel.dataProcess import dataProcess
@@ -44,11 +40,10 @@ for i in range(EPOCH):
         prompt = data['prompt']
         human_response = data['rest']
 
-        # 测试我们的模型是将在arxiv数据集归类为人类还是人工智能生成 log_prob大的是
         whole_abstract = prompt + ' ' + human_response
         id_list = llm.llm.str_to_idlist(whole_abstract)
-        marked_total_log_prob = llm.calc_log_prob(id_list, with_wk=True)  # gpt写的，即做了水印标记
-        unmarked_total_log_prob = llm.calc_log_prob(id_list, with_wk=False)  # 人类写的logit
+        marked_total_log_prob = llm.calc_log_prob(id_list, with_wk=True)
+        unmarked_total_log_prob = llm.calc_log_prob(id_list, with_wk=False)
         current_human_eval_status = (unmarked_total_log_prob < marked_total_log_prob)  # 记录计算后判断成功
         human_evals.append(current_human_eval_status)
 
@@ -57,5 +52,4 @@ for i in range(EPOCH):
 
     human_eval_correct = sum(human_evals) / len(human_evals) * 100
     print(f'Human-generated text correctly classified: {human_eval_correct:.2f}%')
-    # 将结果写入日志
     logger.info(f'Human-generated text correctly classified: {human_eval_correct:.2f}%')

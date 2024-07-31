@@ -1,6 +1,4 @@
-'''
-识别arxiv不同方向的摘要人写和机器写 统一生成100个单词
-'''
+
 from model.waterMarked import waterMarked
 from model.LLM import LLM
 from dataModel.dataProcess import dataProcess
@@ -42,12 +40,11 @@ for i in range(len(DIF_DIRS)):
         prompt = data['prompt']
         human_response = data['rest']
 
-        # 测试我们的模型是将在arxiv数据集归类为人类还是人工智能生成 log_prob大的是添加了水印的gpt写的
         dir_whole_abstract = prompt + ' ' + human_response
         id_list = llm.llm.str_to_idlist(dir_whole_abstract)
-        marked_total_log_prob = llm.calc_log_prob(id_list, with_wk=True)  # gpt写的，即做了水印标记
-        unmarked_total_log_prob = llm.calc_log_prob(id_list, with_wk=False)  # 人类写的logit
-        current_human_eval_status = (unmarked_total_log_prob < marked_total_log_prob)  # 记录计算后判断成功
+        marked_total_log_prob = llm.calc_log_prob(id_list, with_wk=True)
+        unmarked_total_log_prob = llm.calc_log_prob(id_list, with_wk=False)
+        current_human_eval_status = (unmarked_total_log_prob < marked_total_log_prob)
         human_evals.append(current_human_eval_status)
         print(f'The result of the {DIF_DIRS[i]} direction: Iteration {j + 1}/{dataset_len}: Human: {current_human_eval_status}', flush=True)
 
@@ -55,5 +52,4 @@ for i in range(len(DIF_DIRS)):
     human_eval_correct = sum(human_evals) / len(human_evals) * 100
 
     print(f'The result of the {DIF_DIRS[i]} direction: Human-generated text correctly classified: {human_eval_correct:.2f}%')
-    # 将结果写入日志
     logger.info(f'The result of the {DIF_DIRS[i]} direction: Human-generated text correctly classified: {human_eval_correct:.2f}%')
