@@ -1,5 +1,5 @@
 '''
-HarryPotter小说实验
+HarryPotter Novel experiment TPR 100%
 '''
 from model.waterMarked import waterMarked
 from model.LLM import LLM
@@ -39,14 +39,11 @@ for i in range(EPOCH):
         human_response = data['rest']
         rest_len = len(human_response)
 
-        #  生成带水印文本
         id_list = llm.llm.str_to_idlist(prompt)
         generate_text_with_wk = llm.generate_next_ids(id_list, gen_len=rest_len, wk=True)
-        marked_text_content = llm.llm.tokenlist_to_str(llm.llm.idlist_to_tokenlist(generate_text_with_wk)) # 带有水印的生成内容
+        marked_text_content = llm.llm.tokenlist_to_str(llm.llm.idlist_to_tokenlist(generate_text_with_wk))
         text_with_wk = generate_text_with_wk[len(id_list):]
 
-        # 测试模型是否正确分类带水印的文本
-        # 带水印攻击的，会一直干扰拉低logit 导致最后结果低于没有带水印的
         with_wk_total_log_prob = llm.calc_log_prob(generate_text_with_wk, with_wk=True)
         with_no_wk_total_log_prob = llm.calc_log_prob(generate_text_with_wk, with_wk=False)
         wk_eval = (with_no_wk_total_log_prob > with_wk_total_log_prob )
@@ -62,9 +59,7 @@ for i in range(EPOCH):
                 f'Iteration {j + 1}/{500} The prompt: {prompt},//======//, the generate: {marked_text_content}, the with_wk_total_log_prob is {with_wk_total_log_prob}, the with_no_wk_total_log_prob is {with_no_wk_total_log_prob}')
 
 
-    # 计算分类精度
     eval_correct = sum(wk_evals) / len(wk_evals) * 100
 
     print(f'The result of the HarryPotter experiment: Watermarked text correctly classified: {eval_correct:.2f}%')
-    # 将结果写入日志
     logger.info(f'The result of the HarryPotter experiment: Watermarked text correctly classified: {eval_correct:.2f}%')
